@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Investments</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+      <h2>My Investments</h2>
+
+      {% if investments %}
+          <ul class="list-group">
+              {% for investment in investments %}
+                  <li class="list-group-item">
+                      <strong>Startup:</strong> <a href="{% url 'startup_detail' investment.startup.pk %}">{{ investment.startup.name }}</a><br>
+                      <strong>Amount Invested:</strong> ${{ investment.amount_invested }}<br>
+                      <strong>Equity Taken:</strong> {{ investment.equity_taken }}%
+                  </li>
+              {% endfor %}
+          </ul>
+      {% else %}
+          <p>You have not made any investments yet.</p>
+      {% endif %}
+  </div>
+{% endblock %}
+</body>
+</html>

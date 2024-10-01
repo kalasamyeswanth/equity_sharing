@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+{% block content %}
+  <h2>{{ startup.name }}</h2>
+  <p>{{ startup.description }}</p>
+  <p><strong>Founder:</strong> {{ startup.founder.username }}</p>
+  <p><strong>Equity Offered:</strong> {{ startup.equity_offered }}%</p>
+  <p><strong>Valuation:</strong> ${{ startup.valuation }}</p>
+
+  <h3>Invest in this Startup</h3>
+  <form method="POST" action="{% url 'invest_in_startup' startup.pk %}">
+    {% csrf_token %}
+    {{ investment_form.as_p }}
+    <button type="submit" class="btn btn-primary">Invest</button>
+  </form>
+{% endblock %}
+</body>
+</html>
